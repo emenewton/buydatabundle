@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order History</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --mtn-yellow: #ffcc00;
+            --mtn-dark: #000000;
+            --text-dark: #212529;
+            --text-light: #6c757d;
+            --shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            --header-bg: #fff; /* Added for consistency */
+            --telecel-red: #E32526;
+            --airteltigo-red: #ED1C24;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #f5f7ff 0%, #e8ecff 100%);
+            color: var(--text-dark);
+            line-height: 1.6;
+            min-height: 100vh;
+            padding-top: 80px;
+        }
+        
+        header {
+            background: white;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            padding: 15px 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            left: 0;
+            z-index: 1000;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: var(--text-dark);
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+        }
+        
+        .logo i {
+            margin-right: 10px;
+            color: var(--mtn-yellow);
+        }
+
+        main {
+            padding: 2rem 0;
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 2rem;
+            font-size: 2rem;
+        }
+
+        .order-history-section {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 12px;
+            box-shadow: var(--shadow);
+        }
+        
+        .order-table-container {
+            overflow-x: auto;
+        }
+
+        .order-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.9rem;
+        }
+        
+        .order-table th, .order-table td {
+            text-align: left;
+            padding: 0.75rem 0.5rem;
+            border-bottom: 1px solid #dee2e6;
+        }
+        
+        .order-table th {
+            background-color: #f8f9fa;
+            color: var(--text-light);
+            font-weight: 500;
+            text-transform: uppercase;
+        }
+        
+        footer {
+            text-align: center;
+            padding: 2rem 0;
+            color: #6c757d;
+            margin-top: 2rem;
+            border-top: 1px solid #eee;
+        }
+
+        .back-link {
+            color: var(--text-light);
+            text-decoration: none;
+            margin-bottom: 1rem;
+            display: inline-block;
+            font-size: 0.9rem;
+        }
+        
+        .back-link:hover {
+            text-decoration: underline;
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 768px) {
+            h2 {
+                font-size: 1.5rem;
+            }
+        }
+        
+        /* Mobile-first navigation styles */
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .main-nav {
+            display: flex;
+            gap: 20px;
+        }
+
+        .nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-decoration: none;
+            color: var(--text-dark); /* Corrected from --dark */
+            font-weight: bold;
+            font-size: 0.8rem;
+            position: relative;
+        }
+
+        .nav-item span {
+            display: none; /* Hide text on mobile */
+        }
+
+        .nav-item i {
+            font-size: 1.5rem;
+        }
+
+        /* Corrected CSS for the header cart count */
+        #cart-count {
+            position: absolute;
+            top: -5px;
+            right: -10px;
+            background-color: var(--mtn-yellow); /* Use a defined variable */
+            color: black;
+            border-radius: 50%;
+            padding: 2px 6px;
+            font-size: 0.75rem;
+            font-weight: bold;
+            min-width: 20px;
+            text-align: center;
+        }
+        
+        /* Floating View Cart Button */
+        .floating-cart-btn {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: var(--mtn-yellow);
+            color: black;
+            padding: 15px 25px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1rem;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transition: transform 0.3s ease;
+        }
+
+        .floating-cart-btn:hover {
+            transform: scale(1.05);
+        }
+
+        .floating-cart-btn .cart-count {
+            background-color: black;
+            color: white;
+            border-radius: 50%;
+            padding: 5px 10px;
+            min-width: 30px;
+            text-align: center;
+            font-size: 0.9rem;
+        }
+
+        /* Desktop navigation styles */
+        @media (min-width: 768px) {
+            .header-content {
+                justify-content: space-between;
+            }
+            
+            .nav-item {
+                flex-direction: row;
+                font-size: 1rem;
+            }
+            
+            .nav-item span {
+                display: inline; /* Show text on desktop */
+                margin-left: 8px;
+            }
+            
+            .nav-item i {
+                font-size: 1rem;
+            }
+            
+            #cart-count {
+                position: static;
+                margin-left: 8px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <a href="homepage.html" class="logo">
+                    <i class="fas fa-sim-card"></i>
+                    Ghana Telecom Bundles
+                </a>
+            <nav class="main-nav">
+                <a href="homepage.html" class="nav-item">
+                    <i class="fas fa-home"></i>
+                    <span>Home</span>
+                </a>
+                <a href="cart.html" class="nav-item">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span>Cart</span>
+                    <span id="cart-count">0</span>
+                </a>
+                <a href="order-history.html" class="nav-item">
+                    <i class="fas fa-history"></i>
+                    <span>History</span>
+                </a>
+            </nav>
+            </div>
+        </div>
+    </header>
+
+    <main class="container">
+        <h2>Order History</h2>
+        <a href="homepage.html" class="back-link">
+            <i class="fas fa-arrow-left"></i> Back to Homepage
+        </a>
+        <div class="order-history-section">
+            <div class="order-table-container">
+                <table class="order-table">
+                    <thead>
+                        <tr>
+                            <th>Time</th>
+                            <th>Package Name</th>
+                            <th>Bundle Unit</th>
+                            <th>Beneficiary Number</th>
+                            <th>Amount</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody id="order-history-items">
+                        </tbody>
+                </table>
+            </div>
+        </div>
+    </main>
+    
+    <footer>
+        <div class="container footer-content">
+            <div class="footer-logo">
+                Ghana Telecom Bundles
+            </div>
+            <nav class="footer-nav">
+                <a href="homepage.html">Home</a>
+                <a href="cart.html">Cart</a>
+                <a href="order-history.html">Order History</a>
+            </nav>
+            <p class="footer-bottom-text">&copy; 2025 Mobile Bundles. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Select both cart count elements
+            const cartCountNav = document.getElementById('cart-count');
+            const floatingCartCountSpan = document.getElementById('floating-cart-count');
+            const orderHistoryKey = 'orderHistory';
+            const orderHistoryTable = document.getElementById('order-history-items');
+
+            // Function to update both cart counts
+            function updateCartCount() {
+                const mtnCart = JSON.parse(localStorage.getItem('mtnCart')) || [];
+                const airteltigoCart = JSON.parse(localStorage.getItem('airteltigoCart')) || [];
+                const telecelCart = JSON.parse(localStorage.getItem('telecelCart')) || [];
+                
+                const totalItems = mtnCart.length + airteltigoCart.length + telecelCart.length;
+                
+                if (cartCountNav) {
+                    cartCountNav.textContent = totalItems;
+                }
+                if (floatingCartCountSpan) {
+                    floatingCartCountSpan.textContent = totalItems;
+                }
+            }
+
+function renderOrderHistory() {
+                const orderHistory = JSON.parse(localStorage.getItem(orderHistoryKey)) || [];
+                orderHistoryTable.innerHTML = ''; // Clear existing content
+
+                if (orderHistory.length === 0) {
+                    const noOrdersRow = document.createElement('tr');
+                    noOrdersRow.innerHTML = `<td colspan="6" style="text-align: center; padding: 20px;">No orders found.</td>`;
+                    orderHistoryTable.appendChild(noOrdersRow);
+                } else {
+                    orderHistory.forEach(item => {
+                        const row = document.createElement('tr');
+                        row.innerHTML = `
+                            <td>${item.time}</td>
+                            <td>${item.packageName}</td>
+                            <td>${item.unit}</td>
+                            <td>${item.number}</td>
+                            <td>GH¢${item.amount.toFixed(2)}</td>
+                            <td><span style="color: green; font-weight: bold;">Completed</span></td>
+                        `;
+                        orderHistoryTable.appendChild(row);
+                    });
+                }
+            }
+            
+            // Initial calls to render data on page load
+            updateCartCount();
+            renderOrderHistory();
+        });
+    </script>
+</body>
+</html>
