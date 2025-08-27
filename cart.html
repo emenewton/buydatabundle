@@ -30,7 +30,6 @@
             color: var(--text-dark);
             line-height: 1.6;
             min-height: 100vh;
-            /* This is the key line to fix the header overlap */
             padding-top: 80px; 
         }
         
@@ -49,14 +48,14 @@
             max-width: 1200px;
             margin: 0 auto;
             padding: 0 20px;
-            display: flex; /* Change to flex for mobile */
-            flex-direction: column; /* Stack items vertically */
+            display: flex;
+            flex-direction: column;
             gap: 1.5rem;
         }
 
         @media (min-width: 992px) {
             .container {
-                display: grid; /* Switch to grid for desktop */
+                display: grid;
                 grid-template-columns: 2fr 1fr;
             }
         }
@@ -100,12 +99,13 @@
             width: 100%;
             border-collapse: collapse;
             font-size: 0.9rem;
-            max-width: 100%; /* Add this line */
-            table-layout: fixed; /* And this line */
+            max-width: 100%;
+            table-layout: fixed;
         }     
         .cart-table th, .cart-table td {
             text-align: left;
             padding: 0.75rem 0.5rem;
+            word-break: break-all;
         }
         
         .cart-table th {
@@ -216,6 +216,7 @@
         @media (max-width: 768px) {
             body {
                 padding: 1rem 0.5rem;
+                padding-top: 100px;
             }
 
             .container {
@@ -234,14 +235,58 @@
             .cart-section h2 {
                 font-size: 1.1rem;
             }
-
-            .cart-table {
-                font-size: 0.75rem;
-            }
             
-            .cart-table th, .cart-table td {
-                padding: 0.5rem 0.25rem;
+            /* --- Mobile Table as a List --- */
+            .cart-table thead {
+                display: none; /* Hide table headers on mobile */
             }
+
+            .cart-table, .cart-table tbody, .cart-table tr, .cart-table td {
+                display: block; /* Make all elements block-level */
+                width: 100%;
+            }
+
+            .cart-table tr {
+                margin-bottom: 15px;
+                border: 1px solid #e0e0e0;
+                border-radius: 8px;
+                box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+                padding: 10px;
+                background-color: #fff;
+            }
+
+            .cart-table td {
+                text-align: right;
+                position: relative;
+                padding-left: 50%;
+                border: none;
+                border-bottom: 1px solid #f0f0f0;
+            }
+
+            /* Display labels before each cell content */
+            .cart-table td::before {
+                content: attr(data-label);
+                position: absolute;
+                left: 10px;
+                width: 45%;
+                font-weight: bold;
+                text-align: left;
+                color: var(--text-dark);
+            }
+
+            /* Adjustments for the last child and remove button */
+            .cart-table tr:last-child {
+                border-bottom: none;
+            }
+            .cart-table td:last-child {
+                border-bottom: none;
+                text-align: center;
+                padding: 10px 0;
+            }
+            .cart-table td:last-child::before {
+                content: '';
+            }
+            /* End of Mobile Table as a List */
 
             .total-amount .value {
                 font-size: 1.8rem;
@@ -325,7 +370,7 @@
             <div class="header-content">
                 <a href="index.html" class="logo">
                     <i class="fas fa-sim-card"></i>
-                    Ghana Telecom Bundles
+                    Telecom Bundles
                 </a>
             <nav class="main-nav">
                 <a href="index.html" class="nav-item">
@@ -436,13 +481,14 @@
             } else {
                 allItems.forEach((item) => {
                     const row = document.createElement('tr');
+                    // Add data-label attributes to each td for the mobile view
                     row.innerHTML = `
-                        <td>${item.time}</td>
-                        <td>${item.packageName}</td>
-                        <td>${item.unit}</td>
-                        <td>${item.number}</td>
-                        <td>GH¢${item.amount.toFixed(2)}</td>
-                        <td><button class="remove-btn" data-provider="${item.provider}" data-time="${item.time}" data-number="${item.number}"><i class="fas fa-trash"></i></button></td>
+                        <td data-label="Time">${item.time}</td>
+                        <td data-label="Package Name">${item.packageName}</td>
+                        <td data-label="Bundle Unit">${item.unit}</td>
+                        <td data-label="Beneficiary Number">${item.number}</td>
+                        <td data-label="Amount">GH¢${item.amount.toFixed(2)}</td>
+                        <td data-label="Action"><button class="remove-btn" data-provider="${item.provider}" data-time="${item.time}" data-number="${item.number}"><i class="fas fa-trash"></i></button></td>
                     `;
                     cartItemsTable.appendChild(row);
                     total += item.amount;
@@ -522,7 +568,7 @@
                     localStorage.removeItem(airteltigoCartKey);
                     localStorage.removeItem(telecelCartKey);
                     
-                    window.location.href = 'index.html'; 
+                    window.location.href = 'homepage.html'; 
                 },
                 onClose: function(){
                     alert('Transaction was not completed, window closed.');
