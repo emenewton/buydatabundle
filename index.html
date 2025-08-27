@@ -27,8 +27,6 @@
             color: #333;
             line-height: 1.6;
             min-height: 100vh;
-            /* Adds a top margin to prevent content from hiding behind the fixed header */
-            padding-top: 80px; 
         }
         
         /* Styles for the fixed header */
@@ -303,73 +301,73 @@
         }
 
         /* Mobile-first navigation styles */
-.header-content {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
 
-.main-nav {
-    display: flex;
-    gap: 20px;
-}
+        .main-nav {
+            display: flex;
+            gap: 20px;
+        }
 
-.nav-item {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-decoration: none;
-    color: var(--dark);
-    font-weight: bold;
-    font-size: 0.8rem;
-    position: relative;
-}
+        .nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-decoration: none;
+            color: var(--dark);
+            font-weight: bold;
+            font-size: 0.8rem;
+            position: relative;
+        }
 
-.nav-item span {
-    display: none; /* Hide text on mobile */
-}
+        .nav-item span {
+            display: none; /* Hide text on mobile */
+        }
 
-.nav-item i {
-    font-size: 1.5rem;
-}
+        .nav-item i {
+            font-size: 1.5rem;
+        }
 
-#cart-count {
-    position: absolute;
-    top: -5px;
-    right: -10px;
-    background-color: var(--dark);
-    color: white;
-    border-radius: 50%;
-    padding: 2px 6px;
-    font-size: 0.75rem;
-    font-weight: bold;
-}
+        #cart-count {
+            position: absolute;
+            top: -5px;
+            right: -10px;
+            background-color: var(--dark);
+            color: white;
+            border-radius: 50%;
+            padding: 2px 6px;
+            font-size: 0.75rem;
+            font-weight: bold;
+        }
 
-/* Desktop navigation styles */
-@media (min-width: 768px) {
-    .header-content {
-        justify-content: space-between;
-    }
-    
-    .nav-item {
-        flex-direction: row;
-        font-size: 1rem;
-    }
-    
-    .nav-item span {
-        display: inline; /* Show text on desktop */
-        margin-left: 8px;
-    }
-    
-    .nav-item i {
-        font-size: 1rem;
-    }
-    
-    #cart-count {
-        position: static;
-        margin-left: 8px;
-    }
-}
+        /* Desktop navigation styles */
+        @media (min-width: 768px) {
+            .header-content {
+                justify-content: space-between;
+            }
+            
+            .nav-item {
+                flex-direction: row;
+                font-size: 1rem;
+            }
+            
+            .nav-item span {
+                display: inline; /* Show text on desktop */
+                margin-left: 8px;
+            }
+            
+            .nav-item i {
+                font-size: 1rem;
+            }
+            
+            #cart-count {
+                position: static;
+                margin-left: 8px;
+            }
+        }
     </style>
 </head>
 <body>
@@ -378,7 +376,6 @@
             <div class="header-content">
                 <a href="index.html" class="logo">
                     <i class="fas fa-sim-card"></i>
-                    Ghana Telecom Bundles
                 </a>
                 <nav class="main-nav">
                     <a href="index.html" class="nav-item">
@@ -461,30 +458,43 @@
         </div>
     </div>
     
-<footer>
-    <div class="container footer-content">
-        <div class="footer-logo">
-            Ghana Telecom Bundles
+    <footer>
+        <div class="container footer-content">
+            <div class="footer-logo">
+                Ghana Telecom Bundles 
+            </div>
+            <p class="footer-bottom-text">&copy; 2025 Mobile Bundles. All Rights Reserved.</p>
         </div>
-        <p class="footer-bottom-text">&copy; 2025 Mobile Bundles. All Rights Reserved.</p>
-    </div>
-</footer>
+    </footer>
 
-<script>
-    document.addEventListener('DOMContentLoaded', function() {
-        const cartCountSpan = document.getElementById('cart-count');
-        
-        function updateCartCount() {
-            const mtnCart = JSON.parse(localStorage.getItem('mtnCart')) || [];
-            const airteltigoCart = JSON.parse(localStorage.getItem('airteltigoCart')) || [];
-            const telecelCart = JSON.parse(localStorage.getItem('telecelCart')) || [];
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const cartCountSpan = document.getElementById('cart-count');
             
-            const totalItems = mtnCart.length + airteltigoCart.length + telecelCart.length;
-            cartCountSpan.textContent = totalItems;
-        }
-        
-        updateCartCount();
-    });
-</script>
+            function updateCartCount() {
+                const mtnCart = JSON.parse(localStorage.getItem('mtnCart')) || [];
+                const airteltigoCart = JSON.parse(localStorage.getItem('airteltigoCart')) || [];
+                const telecelCart = JSON.parse(localStorage.getItem('telecelCart')) || [];
+                
+                const totalItems = mtnCart.length + airteltigoCart.length + telecelCart.length;
+                cartCountSpan.textContent = totalItems;
+            }
+            
+            updateCartCount();
+
+            // Dynamic padding to prevent content from overlapping with the fixed header
+            const header = document.querySelector('header');
+            const body = document.querySelector('body');
+            
+            function adjustBodyPadding() {
+                const headerHeight = header.offsetHeight;
+                body.style.paddingTop = `${headerHeight}px`;
+            }
+
+            // Adjust padding on load and resize
+            adjustBodyPadding();
+            window.addEventListener('resize', adjustBodyPadding);
+        });
+    </script>
 </body>
 </html>
