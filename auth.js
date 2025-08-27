@@ -67,7 +67,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 localStorage.setItem('currentUserEmail', email);
 
                 alert('Login successful!');
-                window.location.href = 'homepage.html';
+                window.location.href = 'index.html';
             } else {
                 loginError.textContent = 'Incorrect password.';
                 loginError.style.display = 'block';
