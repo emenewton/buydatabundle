@@ -71,7 +71,7 @@
 
         .main-nav {
             display: flex;
-            gap: 20px;
+            gap: 15px;
         }
 
         .nav-item {
@@ -80,29 +80,32 @@
             align-items: center;
             text-decoration: none;
             color: var(--dark);
-            font-weight: bold;
-            font-size: 0.8rem;
+            font-weight: 600;
+            font-size: 0.7rem;
             position: relative;
         }
         
         .nav-item span {
-            display: none;
+            display: block;
+            margin-top: 4px;
         }
         
         .nav-item i {
-            font-size: 1.5rem;
+            font-size: 1.3rem;
         }
         
         #cart-count {
             position: absolute;
-            top: -5px;
-            right: -10px;
-            background-color: var(--dark);
-            color: white;
+            top: -8px;
+            right: -8px;
+            background-color: var(--mtn);
+            color: var(--dark);
             border-radius: 50%;
-            padding: 2px 6px;
-            font-size: 0.75rem;
+            padding: 3px 7px;
+            font-size: 0.7rem;
             font-weight: bold;
+            min-width: 18px;
+            text-align: center;
         }
         
         @media (min-width: 768px) {
@@ -113,34 +116,36 @@
             .nav-item {
                 flex-direction: row;
                 font-size: 1rem;
+                gap: 8px;
             }
             
             .nav-item span {
-                display: inline;
-                margin-left: 8px;
+                margin-top: 0;
             }
             
             .nav-item i {
-                font-size: 1rem;
+                font-size: 1.1rem;
             }
             
             #cart-count {
                 position: static;
                 margin-left: 8px;
+                background-color: var(--dark);
+                color: white;
             }
         }
 
         /* Main content */
         .main-content {
             flex: 1;
-            padding-top: 100px;
-            padding-bottom: 40px;
+            padding-top: 90px;
+            padding-bottom: 30px;
         }
 
         .cart-page-container {
             max-width: 1200px;
             margin: 0 auto;
-            padding: 0 20px;
+            padding: 0 15px;
             display: flex;
             flex-direction: column;
             gap: 1.5rem;
@@ -150,19 +155,20 @@
             .cart-page-container {
                 display: grid;
                 grid-template-columns: 2fr 1fr;
+                gap: 2rem;
             }
         }
 
         .cart-section {
             background: white;
-            padding: 1.5rem;
+            padding: 1.2rem;
             border-radius: 12px;
             box-shadow: var(--shadow);
         }
         
         .cart-section h2 {
-            margin-bottom: 1.5rem;
-            font-size: 1.5rem;
+            margin-bottom: 1.2rem;
+            font-size: 1.4rem;
             color: var(--dark);
             padding-bottom: 0.5rem;
             border-bottom: 2px solid var(--mtn);
@@ -199,37 +205,6 @@
         
         .cart-table tr:last-child td {
             border-bottom: none;
-        }
-        
-        .cart-table th:nth-child(1),
-        .cart-table td:nth-child(1) {
-            width: 15%;
-        }
-        
-        .cart-table th:nth-child(2),
-        .cart-table td:nth-child(2) {
-            width: 25%;
-        }
-        
-        .cart-table th:nth-child(3),
-        .cart-table td:nth-child(3) {
-            width: 15%;
-        }
-        
-        .cart-table th:nth-child(4),
-        .cart-table td:nth-child(4) {
-            width: 20%;
-        }
-        
-        .cart-table th:nth-child(5),
-        .cart-table td:nth-child(5) {
-            width: 15%;
-        }
-        
-        .cart-table th:nth-child(6),
-        .cart-table td:nth-child(6) {
-            width: 10%;
-            text-align: center;
         }
         
         .remove-btn {
@@ -316,7 +291,7 @@
         .back-link {
             color: var(--gray);
             text-decoration: none;
-            margin-bottom: 1.5rem;
+            margin-bottom: 1.2rem;
             display: inline-flex;
             align-items: center;
             gap: 0.5rem;
@@ -333,7 +308,7 @@
         footer {
             background: white;
             border-top: 1px solid #eee;
-            padding: 30px 0;
+            padding: 25px 0;
             margin-top: auto;
             text-align: center;
         }
@@ -348,160 +323,194 @@
             font-size: 1.2rem;
             font-weight: bold;
             color: var(--dark);
-            margin-bottom: 10px;
+            margin-bottom: 8px;
         }
         
         .footer-bottom-text {
             color: var(--gray);
             font-size: 0.9rem;
         }
-        /* --- Responsive Styles --- */
-        @media (max-width: 768px) {
+
+        /* --- Mobile Styles --- */
+        @media (max-width: 767px) {
             body {
-                padding: 1rem 0.5rem;
-                padding-top: 100px;
+                padding: 0;
+            }
+            
+            .container {
+                padding: 0 15px;
+            }
+            
+            .main-content {
+                padding-top: 80px;
+                padding-bottom: 20px;
             }
 
-            .container {
-                grid-template-columns: 1fr;
+            .cart-page-container {
+                padding: 0 10px;
                 gap: 1rem;
             }
 
             .summary-card {
                 order: -1;
+                margin-bottom: 1rem;
+                padding: 1.2rem;
             }
 
             .cart-section {
                 padding: 1rem;
+                border-radius: 10px;
             }
 
             .cart-section h2 {
-                font-size: 1.1rem;
+                font-size: 1.3rem;
+                margin-bottom: 1rem;
             }
             
-            /* --- Mobile Table as a List --- */
+            /* Mobile Table as Cards */
+            .cart-table-container {
+                border: none;
+                overflow-x: visible;
+            }
+            
+            .cart-table {
+                min-width: 100%;
+            }
+            
             .cart-table thead {
-                display: none; /* Hide table headers on mobile */
+                display: none;
             }
 
-            .cart-table, .cart-table tbody, .cart-table tr, .cart-table td {
-                display: block; /* Make all elements block-level */
+            .cart-table, .cart-table tbody, .cart-table tr {
+                display: block;
                 width: 100%;
             }
 
             .cart-table tr {
-                margin-bottom: 15px;
+                margin-bottom: 16px;
                 border: 1px solid #e0e0e0;
-                border-radius: 8px;
-                box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
-                padding: 10px;
+                border-radius: 10px;
+                box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+                padding: 0;
                 background-color: #fff;
+                overflow: hidden;
             }
 
             .cart-table td {
-                text-align: right;
-                position: relative;
-                padding-left: 50%;
-                border: none;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                padding: 12px 15px;
                 border-bottom: 1px solid #f0f0f0;
+                text-align: right;
             }
 
-            /* Display labels before each cell content */
             .cart-table td::before {
                 content: attr(data-label);
-                position: absolute;
-                left: 10px;
-                width: 45%;
-                font-weight: bold;
+                font-weight: 600;
+                color: var(--dark);
                 text-align: left;
-                color: var(--text-dark);
+                padding-right: 15px;
+                flex: 1;
+            }
+            
+            .cart-table td span {
+                text-align: right;
+                flex: 1;
+                word-break: break-word;
             }
 
-            /* Adjustments for the last child and remove button */
             .cart-table tr:last-child {
-                border-bottom: none;
+                margin-bottom: 0;
             }
+            
             .cart-table td:last-child {
                 border-bottom: none;
-                text-align: center;
-                padding: 10px 0;
+                display: flex;
+                justify-content: center;
+                padding: 12px 15px;
+                background-color: #f9f9f9;
             }
+            
             .cart-table td:last-child::before {
-                content: '';
+                display: none;
             }
-            /* End of Mobile Table as a List */
+            
+            .remove-btn {
+                padding: 8px 16px;
+                background-color: #dc3545;
+                color: white;
+                border-radius: 6px;
+                font-weight: 600;
+                display: inline-flex;
+                align-items: center;
+                gap: 6px;
+            }
+            
+            .remove-btn:hover {
+                background-color: #c82333;
+            }
 
+            .remove-btn i {
+                font-size: 1rem;
+            }
+            
             .total-amount .value {
                 font-size: 1.8rem;
             }
-        }
-        /* Mobile-first navigation styles */
-        .header-content {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .main-nav {
-            display: flex;
-            gap: 20px;
-        }
-
-        .nav-item {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            text-decoration: none;
-            color: var(--dark);
-            font-weight: bold;
-            font-size: 0.8rem;
-            position: relative;
-        }
-
-        .nav-item span {
-            display: none; /* Hide text on mobile */
-        }
-
-        .nav-item i {
-            font-size: 1.5rem;
-        }
-
-        #cart-count {
-            position: absolute;
-            top: -5px;
-            right: -10px;
-            background-color: var(--dark);
-            color: white;
-            border-radius: 50%;
-            padding: 2px 6px;
-            font-size: 0.75rem;
-            font-weight: bold;
-        }
-
-        /* Desktop navigation styles */
-        @media (min-width: 768px) {
-            .header-content {
-                justify-content: space-between;
+            
+            /* Back link styling */
+            .back-link {
+                margin-bottom: 1rem;
+                padding: 8px 0;
+            }
+            
+            /* Navigation adjustments for mobile */
+            .main-nav {
+                gap: 12px;
             }
             
             .nav-item {
-                flex-direction: row;
-                font-size: 1rem;
-            }
-            
-            .nav-item span {
-                display: inline; /* Show text on desktop */
-                margin-left: 8px;
+                font-size: 0.65rem;
             }
             
             .nav-item i {
-                font-size: 1rem;
+                font-size: 1.2rem;
             }
             
             #cart-count {
-                position: static;
-                margin-left: 8px;
+                top: -6px;
+                right: -6px;
+                padding: 2px 5px;
+                font-size: 0.6rem;
+                min-width: 16px;
             }
+            
+            .logo {
+                font-size: 20px;
+            }
+            
+            .logo i {
+                font-size: 22px;
+            }
+        }
+        
+        .empty-cart-message {
+            text-align: center;
+            padding: 2.5rem 1rem;
+            color: var(--gray);
+            font-style: italic;
+            font-size: 1rem;
+        }
+        
+        /* Specific styling for each row to match the image */
+        .cart-table td[data-label="Time"] span {
+            font-weight: 500;
+        }
+        
+        .cart-table td[data-label="Amount"] span {
+            font-weight: 700;
+            color: #2e7d32;
         }
     </style>
     <script src="https://js.paystack.co/v1/inline.js"></script>
@@ -608,18 +617,24 @@
             }
         }
 
+        function formatDate(dateString) {
+            const date = new Date(dateString);
+            const timeOptions = { hour: '2-digit', minute: '2-digit' };
+            return date.toLocaleDateString() + ', ' + date.toLocaleTimeString([], timeOptions);
+        }
+
         function renderCart() {
             const mtnCart = JSON.parse(localStorage.getItem(mtnCartKey)) || [];
             const airteltigoCart = JSON.parse(localStorage.getItem(airteltigoCartKey)) || [];
             const telecelCart = JSON.parse(localStorage.getItem(telecelCartKey)) || [];
-            const allItems = [...mtnCart, ...airteltigoCart, ...telecelCart].sort((a, b) => new Date(a.time) - new Date(b.time));
+            const allItems = [...mtnCart, ...airteltigoCart, ...telecelCart].sort((a, b) => new Date(b.time) - new Date(a.time));
 
             cartItemsTable.innerHTML = '';
             let total = 0;
 
             if (allItems.length === 0) {
                 const noItemsRow = document.createElement('tr');
-                noItemsRow.innerHTML = `<td colspan="6" style="text-align: center; padding: 20px;">Your cart is empty.</td>`;
+                noItemsRow.innerHTML = `<td colspan="6" class="empty-cart-message">Your cart is empty.</td>`;
                 cartItemsTable.appendChild(noItemsRow);
                 continueCheckoutBtn.disabled = true;
                 continueCheckoutBtn.style.opacity = '0.5';
@@ -627,13 +642,12 @@
             } else {
                 allItems.forEach((item) => {
                     const row = document.createElement('tr');
-                    // Add data-label attributes to each td for the mobile view
                     row.innerHTML = `
-                        <td data-label="Time">${item.time}</td>
-                        <td data-label="Package Name">${item.packageName}</td>
-                        <td data-label="Bundle Unit">${item.unit}</td>
-                        <td data-label="Beneficiary Number">${item.number}</td>
-                        <td data-label="Amount">GH¢${item.amount.toFixed(2)}</td>
+                        <td data-label="Time"><span>${formatDate(item.time)}</span></td>
+                        <td data-label="Package Name"><span>${item.packageName}</span></td>
+                        <td data-label="Bundle Unit"><span>${item.unit}</span></td>
+                        <td data-label="Beneficiary Number"><span>${item.number}</span></td>
+                        <td data-label="Amount"><span>GH¢${item.amount.toFixed(2)}</span></td>
                         <td data-label="Action"><button class="remove-btn" data-provider="${item.provider}" data-time="${item.time}" data-number="${item.number}"><i class="fas fa-trash"></i></button></td>
                     `;
                     cartItemsTable.appendChild(row);
@@ -714,7 +728,7 @@
                     localStorage.removeItem(airteltigoCartKey);
                     localStorage.removeItem(telecelCartKey);
                     
-                    window.location.href = 'homepage.html'; 
+                    window.location.href = 'index.html'; 
                 },
                 onClose: function(){
                     alert('Transaction was not completed, window closed.');
