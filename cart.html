@@ -560,7 +560,7 @@
                                 <th>Time</th>
                                 <th>Package Name</th>
                                 <th>Bundle Unit</th>
-                                <th>Beneficiary Number</th>
+                                <th>Number</th>
                                 <th>Amount</th>
                                 <th>Action</th>
                             </tr>
@@ -648,7 +648,7 @@
                         <td data-label="Bundle Unit"><span>${item.unit}</span></td>
                         <td data-label="Beneficiary Number"><span>${item.number}</span></td>
                         <td data-label="Amount"><span>GH¢${item.amount.toFixed(2)}</span></td>
-                        <td data-label="Action"><button class="remove-btn" data-provider="${item.provider}" data-time="${item.time}" data-number="${item.number}"><i class="fas fa-trash"></i> Remove</button></td>
+                        <td data-label="Action"><button class="remove-btn" data-provider="${item.provider}" data-time="${item.time}" data-number="${item.number}"><i class="fas fa-trash"></i></button></td>
                     `;
                     cartItemsTable.appendChild(row);
                     total += item.amount;
