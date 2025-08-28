@@ -315,69 +315,71 @@
         <div class="container">
             <div class="header-content">
                 <a href="index.html" class="logo">
-                    <i class="fas fa-home"></i>   
+                    <i class="fas fa-home"></i>
                 </a>
-            <nav class="main-nav">
-                <a href="#" class="nav-item">
-                    <i class="fas fa-sim-card"></i>
-                    <span>Buy Bundle</span>
-                </a>
-                <a href="cart.html" class="nav-item">
-                    <i class="fas fa-shopping-cart"></i>
-                    <span>Cart</span>
-                    <span id="cart-count">0</span>
-                </a>
-                <a href="order-history.html" class="nav-item">
-                    <i class="fas fa-history"></i>
-                    <span>Orders</span>
-                </a>
-                <a href="#" class="nav-item">
+                <nav class="main-nav">
+                    <a href="index.html" class="nav-item">
+                        <i class="fas fa-sim-card"></i>
+                        <span>Buy Bundle</span>
+                    </a>
+                    <a href="cart.html" class="nav-item">
+                        <i class="fas fa-shopping-cart"></i>
+                        <span>Cart</span>
+                        <span id="cart-count">0</span>
+                    </a>
+                    <a href="order-history.html" class="nav-item">
+                        <i class="fas fa-history"></i>
+                        <span>Orders</span>
+                    </a>
+                    <a href="#" class="nav-item">
                         <i class="fas fa-user"></i>
                         <span>Account</span>
                     </a>
-            </nav>
+                </nav>
             </div>
         </div>
     </header>
 
-    <div class="container">
-        <div class="cart-section">
-            <a href="index.html" class="back-link">
-                <i class="fas fa-arrow-left"></i> Continue Shopping
-            </a>
-            <h2>My Cart Items</h2>
-            <div class="cart-table-container">
-                <table class="cart-table">
-                    <thead>
-                        <tr>
-                            <th>Time</th>
-                            <th>Package Name</th>
-                            <th>Bundle Unit</th>
-                            <th>Beneficiary Number</th>
-                            <th>Amount</th>
-                            <th>Action</th>
-                        </tr>
-                    </thead>
-                    <tbody id="cart-items">
+    <div class="main-content">
+        <div class="cart-page-container">
+            <div class="cart-section">
+                <a href="index.html" class="back-link">
+                    <i class="fas fa-arrow-left"></i> Continue Shopping
+                </a>
+                <h2>My Cart Items</h2>
+                <div class="cart-table-container">
+                    <table class="cart-table">
+                        <thead>
+                            <tr>
+                                <th>Time</th>
+                                <th>Package Name</th>
+                                <th>Bundle Unit</th>
+                                <th>Beneficiary Number</th>
+                                <th>Amount</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody id="cart-items">
                         </tbody>
-                </table>
-            </div>
-        </div>
-        
-        <div class="summary-card">
-            <div class="summary-details">
-                <div class="total-amount">
-                    <span class="label">Total Cart Amount</span>
-                    <span class="value" id="total-amount">GH¢0.00</span>
-                </div>
-                <div class="total-count">
-                    <span class="label">Total Count</span>
-                    <span class="value" id="total-count">0</span>
+                    </table>
                 </div>
             </div>
-            <button class="checkout-btn" id="continue-checkout-btn">
-                <i class="fas fa-check-circle"></i> Continue To CheckOut
-            </button>
+            
+            <div class="summary-card">
+                <div class="summary-details">
+                    <div class="total-amount">
+                        <span class="label">Total Cart Amount</span>
+                        <span class="value" id="total-amount">GH¢0.00</span>
+                    </div>
+                    <div class="total-count">
+                        <span class="label">Total Count</span>
+                        <span class="value" id="total-count">0</span>
+                    </div>
+                </div>
+                <button class="checkout-btn" id="continue-checkout-btn">
+                    <i class="fas fa-check-circle"></i> Continue To CheckOut
+                </button>
+            </div>
         </div>
     </div>
     
@@ -530,6 +532,7 @@
 </script>
 </body>
 </html>
+
 
 
 
